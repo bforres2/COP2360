@@ -1,0 +1,63 @@
+using System;
+
+public class divisionProgram
+{
+   
+    public static void Main(string[] args)
+{
+    
+    Console.WriteLine("Please Enter First Number: ");
+    string input_num1 = Console.ReadLine();
+   
+    Console.WriteLine("Please Enter Second Number: ");
+    string input_num2 = Console.ReadLine();
+    
+    try
+    
+    { 
+        int num1 = Convert.ToInt32(input_num1);
+        int num2 = Convert.ToInt32(input_num2);
+        
+        int division = Divide(num1, num2);
+        
+        Console.WriteLine($"The result of {num1} divided by {num2}: {division}");
+        
+    }
+    
+    catch (FormatException example)
+    {
+        Console.WriteLine("Error: One or both of the input numbers are not valid");
+        Console.WriteLine($"Message: {example.Message}");
+    }
+
+ /* catch (ArithmeticException example) //Arithmetic Exception Commented since it includes other math catches
+    {
+        Console.WriteLine("An Arithmetic Exception Occurred...");
+        Console.WriteLine($"Message: {example.Message}");
+    }
+*/
+    catch (DivideByZeroException example) 
+    {
+        Console.WriteLine("Error: Division by Zero Not Permitted");
+        Console.WriteLine($"Message: {example.Message}");
+    }
+
+      catch(OverflowException example)
+{
+    Console.WriteLine($"This is an Example of Overflow Exception");
+    Console.WriteLine($"Message: {example.Message}");
+    
+}
+    catch (Exception example)
+    {
+        Console.WriteLine($"An Error Occurred");
+        Console.WriteLine($"An Error Message Occurred: {example.Message}");
+    }
+  
+    
+      static int Divide(int x, int y) 
+    {
+        return x / y; 
+    }
+}
+}
