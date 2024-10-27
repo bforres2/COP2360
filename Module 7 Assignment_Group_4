@@ -1,0 +1,154 @@
+//Module 7_ Group4 Assignment_Dictionary
+//Bradley Forrester and Anthony Maspoch
+
+using System;
+//Used for Dictionary
+using System.Collections.Generic;
+//Used for Sorting Function
+using System.Linq;
+
+public class Program
+
+{
+
+    public static void Main(string[] args)
+
+{
+
+        //Welcome Statement
+
+        Console.WriteLine("Welcome to Group 4's Dictionary!\n");
+
+        Dictionary<int,string> Group4_Dictionary = new Dictionary<int,string>();
+
+        //Ask User What Function They Wish to Perform and run While loop to Keep program active
+
+        while(true)
+
+{
+
+    //Provide User with Choices for the Dictionary Program               
+
+        Console.WriteLine("Please Enter the Number from the List for the Action you would like to Perform: \n");
+
+        Console.WriteLine("1. Populate a Dictionary/ Add Keys_Values to your Dictionary \n");
+
+        Console.WriteLine("2. Display Contents of the Dictionary\n");
+
+        Console.WriteLine("3. Remove a Key \n ");
+
+        Console.WriteLine("4. Append (add value) to an Existing Value by Key \n");
+
+        Console.WriteLine("5. Sort Keys in Dictionary by Keys\n");
+
+                                   
+        //Need to Convert to Int so User can Pick Function/Case by Number
+        int Action = Convert.ToInt32(Console.ReadLine()); 
+
+        //Create Switch Statement   
+        switch(Action) 
+{
+
+                                               
+
+        case(1):
+
+        //Create a Dictionary or Add to Dictionary
+
+                                                Console.WriteLine("Enter Index Number (KEY) for Dictionary: ");
+
+                                                int num = Convert.ToInt32(Console.ReadLine());
+
+                                                Console.WriteLine("Enter Value (string) to complete KEY/VALUE Pair: ");
+
+                                                string item = Console.ReadLine();
+
+                                                Group4_Dictionary.Add(num, item);
+
+                                                break;
+
+                                               
+
+        case(2):
+
+                                                //Display the Dictionary
+
+                                                Console.WriteLine("Your Dictionary is currently:");
+
+                                                foreach(KeyValuePair<int,string> display in Group4_Dictionary)
+
+{
+
+                                                Console.WriteLine("Key: {0}, Value: {1}", display.Key, display.Value);
+
+                                                }
+
+                                                break;
+
+        case(3):
+
+                                                //Remove Key
+
+                                                Console.WriteLine("Practice Removing a Key/Value Pair");
+
+                                                Console.WriteLine("Which Key/Value Pair to Remove?");
+
+                                                int removekey = Convert.ToInt32(Console.ReadLine());
+
+                                                Group4_Dictionary.Remove(removekey);
+
+                                                break;
+
+        case(4): // Add Value to Existing Value by Key
+                                                
+    	                Console.WriteLine("Append (Add) a Value to an Existing Key.  What Key do you want to Add a Value to?");
+
+	                    int updatedKey = Convert.ToInt32(Console.ReadLine());
+        
+	                    Console.WriteLine("Enter a Value to Append/Add to Current Value");
+	                    string newValue = Console.ReadLine();
+
+//Provide User with ability to add Value to Current Value Choosing a Key
+
+	Group4_Dictionary[updatedKey] = Group4_Dictionary[updatedKey]+" "+ newValue;
+                                                break;
+
+    	case(5): //Sort Dictionary by Key
+
+        var sortDictByKey = Group4_Dictionary.OrderBy(key_value => key_value.Key).ToDictionary(key_value => key_value.Key, key_value => key_value.Value);
+
+        foreach(KeyValuePair < int, string > key_value in sortDictByKey) 
+{
+            Console.WriteLine("Sort Keys in Dictionary by Key: {0}: {1}", key_value.Key, key_value.Value);
+}
+                                    break;
+
+                                               
+
+}
+
+//Provide User with Choice to Continue Running Program
+
+                        Console.WriteLine("Would you like to choose another Action: Y or N ?");
+
+                        char YN = Convert.ToChar(Console.ReadLine());
+
+                       
+
+                        if(YN == 'N')
+
+{
+
+                                   //End the Program
+
+                                    Console.WriteLine("End Program. Thank You");
+
+                                    break;
+
+}
+
+}
+
+}
+
+}
