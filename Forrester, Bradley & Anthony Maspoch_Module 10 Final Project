@@ -1,0 +1,300 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+//add parent/base class
+public class Contractor 
+{
+        
+    public string contractor_name;
+    public string contractor_number;
+    public string start_date;
+    
+    public string intro;
+    
+     
+         
+    //constructor- example contractor
+         
+    public Contractor() 
+{
+    
+    intro  = "Please Enter Data for the following";
+    
+}
+    //accessors and mutators settings for Contractor class
+    public string Name 
+{
+        
+        get {return contractor_name;}
+        set {contractor_name = value;}
+}
+    public string Number 
+{
+        
+        get {return contractor_number;}
+        set {contractor_number = value;}
+}
+    
+    public string Start 
+{
+        
+        get {return start_date;}
+        set {start_date = value;}
+        
+}
+}
+         
+//add Subcontractor - child class
+public class Subcontractor: Contractor
+{
+	
+    public  int shifts;
+    public  double hourly_pay_rate;
+	public float diff;
+
+
+public Subcontractor () 
+{
+//add constructor for differential
+	diff = 0.03F;
+	float float_diff = (float)diff;
+
+}
+	
+//add mutators and accessors for Subcontractor class
+public int Shift 
+{
+	
+	get {return shifts;}
+	set {shifts = value;}
+	
+}
+
+public float Diff 
+{
+	
+	get {return diff;}
+	set {diff = value;}
+	
+}
+	
+public double Rate 
+{
+	
+	get {return hourly_pay_rate;}
+	set {hourly_pay_rate = value;}
+	
+}	
+}
+       
+         
+public class Program
+{
+          
+    public static void Main()
+    {
+        
+    //new objects of Contractor and Subcontractor
+    Contractor myContractor = new Contractor();
+	Subcontractor mySubcontractor = new Subcontractor();
+        
+		//Build List to Display Subcontractor Information
+		
+        List<Contractor> contractors = new List<Contractor>();
+        List<Contractor> phone = new List<Contractor>();
+        List<Contractor> date = new List<Contractor>();
+        List<Subcontractor> shift = new List<Subcontractor>();
+        List<Subcontractor> pay = new List<Subcontractor>();
+        
+		
+        while(true) 
+		{
+    
+        Console.WriteLine("Welcome to the Subcontractor App! \n");
+        Console.WriteLine("What would you like to do?\n");
+        Console.WriteLine("Please type the number of the Action you would like to perform\n");
+        Console.WriteLine("1. Add a New Subcontractor's Name, Phone, Start Date, Shift and Pay Rate\n");
+        Console.WriteLine("2. View List of Subcontractors and their Information \n");
+		Console.WriteLine("3. Add Additional Information to Subcontractor (Name, Phone, Start Date Only)\n");
+		Console.WriteLine("4. Display Subcontractors with 2nd Shift Differentials\n");
+        Console.WriteLine("5. End the Program\n");
+        
+        int action = Convert.ToInt32(Console.ReadLine());
+        
+        
+        
+        if (action == 1) 
+            {
+            
+            Console.WriteLine(myContractor.intro +": \n");
+			
+		
+            
+            Console.WriteLine("Current Index: " + (contractors.Count()));
+			Console.WriteLine("Enter the Name of the Contractor\n");
+            contractors.Add(new Contractor {Name = Console.ReadLine()});
+			
+            
+            Console.WriteLine("Enter the Contractors Phone Number\n");
+            phone.Add(new Contractor {Number = Console.ReadLine()});
+            
+            Console.WriteLine("Enter the Contractors Start Date\n");
+            date.Add(new Contractor {Start = Console.ReadLine()});
+			
+            Console.WriteLine("What Shift Does the Subcontractor Work?");
+            shift.Add(new Subcontractor {Shift = Convert.ToInt32(Console.ReadLine())});
+            
+            Console.WriteLine("What is the Hourly Pay?");
+            pay.Add(new Subcontractor {Rate = Convert.ToDouble(Console.ReadLine())});
+			
+			
+            }
+            
+            
+            
+        else if (action == 2)
+            {
+            Console.WriteLine("The Name of each Contractor\n");
+            
+            foreach (var name in contractors) 
+            {
+                
+            Console.WriteLine(name.Name);
+
+            }
+            
+            Console.WriteLine("The Phone Number of each Contractor\n");
+            
+            foreach (var phonenum in phone) 
+			{
+                
+                Console.WriteLine(phonenum.Number);
+            }
+            
+            Console.WriteLine("The Start Date for Each Employee");
+            
+            
+            foreach (var begindate in date) 
+			{
+                
+                Console.WriteLine(begindate.Start);
+            }
+                
+            Console.WriteLine("The Shift for Contractor is: \n");
+            
+            foreach (var shifts in shift) {
+            
+                Console.WriteLine(shifts.Shift);
+            }
+				
+			Console.WriteLine("The Rate of Pay for this employee is: \n");
+				
+			foreach (var payrate in pay) 
+			{
+				
+				Console.WriteLine(payrate.Rate);
+				
+			}
+			}
+			
+		//add additional functionality to program to addend information at a certain index (e.g. add 2nd phone)
+		else if (action == 3)
+				
+			{
+				Console.WriteLine("What List Do You Want to Add Information Too? \n");
+				Console.WriteLine("Enter 1 for Name\n");
+				Console.WriteLine("Enter 2 for Phone\n");
+				Console.WriteLine("Enter 3 for Start Date\n");
+		
+				int change = Convert.ToInt32(Console.ReadLine());
+				
+				if (change == 1)
+				{
+					Console.WriteLine("What is the index number?");
+					int index0 = Convert.ToInt32(Console.ReadLine());
+					
+					Console.WriteLine("Adding the following information to index: " + index0);
+					Console.WriteLine(contractors[index0].Name);
+					
+					string newName0 = Console.ReadLine();
+					string currentName0 = contractors[index0].Name;
+					
+					contractors[index0] = (new Contractor {Name = currentName0 + " " + newName0});
+					
+				}
+				else if (change == 2)
+				{
+					Console.WriteLine("What is the index number?");
+					int index1 = Convert.ToInt32(Console.ReadLine());
+					
+					Console.WriteLine("Adding the following information to index: " +index1);
+					
+					Console.WriteLine(phone[index1].Number);
+					
+					string newNumber = Console.ReadLine();
+					string currentNumber = phone[index1].Number;
+					
+					phone[index1] = (new Contractor {Number = currentNumber + " " + newNumber});
+				}
+			
+				else if (change == 3)
+					
+				{
+					Console.WriteLine("What is the index number?");
+					int index2 = Convert.ToInt32(Console.ReadLine());
+					
+					Console.WriteLine("Adding the following information to index: " + index2);
+					Console.WriteLine(date[index2].Start);
+					
+					string newDate = Console.ReadLine();
+					string currentDate = date[index2].Start;
+					
+					date[index2] = (new Contractor {Name = currentDate + " " + newDate});
+					
+					}
+			
+					}
+			
+			else if (action == 4) 
+				
+			{
+			
+				foreach (var shifts in shift)
+			{
+				if (shifts.Shift == 2)
+					
+			{
+					
+					int i = shift.IndexOf(shifts);
+					//Console.WriteLine("The differential being calculated is at index: " + i +"\n");
+					
+					
+					
+					foreach (var payrate in pay)
+						
+					{
+					
+						int j = pay.IndexOf(payrate);
+						
+						if (i ==j) 
+					{
+						
+						//Returning a float (multiply_diff) from multiplying diff and Rate (hourly_pay_rate) 
+						float multiply_diff = Convert.ToSingle(mySubcontractor.diff* payrate.Rate + (payrate.Rate));
+						Console.WriteLine("The Rate of Pay with Differential for Subcontractor at index " + i + " : $" + multiply_diff + "\n");
+					}
+					
+					}
+					}
+					}
+					}
+					
+        else 
+			{
+            Console.WriteLine("Ending the Program. Goodbye!");
+            break;
+			}
+		}
+		}
+		}
